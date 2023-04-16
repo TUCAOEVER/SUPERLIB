@@ -1,0 +1,17 @@
+name: SUPERLIB
+main: com.tucaoever.superlib.SUPERLIB
+version: ${project.version}
+depend:
+  - Skript
+softdepend:
+  - WorldGuard
+  - WorldEdit
+  - HolographicDisplays
+  - PlaceholderAPI
+  - Citizens
+  - MMOItems
+  - MythicMobs
+  - MythicLib
+  - ProtocolLib
+api-version: 1.13
+author: TUCAOEVER

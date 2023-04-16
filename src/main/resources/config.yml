@@ -1,0 +1,4 @@
+enable-preloading: false
+thread-pool-size: 10
+max-connection-lifetime: 1800000
+sql-driver-class-name: "default"

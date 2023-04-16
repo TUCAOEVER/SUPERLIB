@@ -1,0 +1,29 @@
+package com.tucaoever.superlib.addons.skriptdb.skript;
+
+import ch.njol.skript.Skript;
+import ch.njol.skript.lang.Literal;
+import ch.njol.skript.lang.SkriptEvent;
+import ch.njol.skript.lang.SkriptParser;
+import com.tucaoever.superlib.addons.skriptdb.events.SQLQueryCompleteEvent;
+import org.bukkit.event.Event;
+
+public class EvtSQLQueryComplete extends SkriptEvent {
+    static {
+        Skript.registerEvent("complete of sql query", EvtSQLQueryComplete.class, SQLQueryCompleteEvent.class, "complete of [(sql|database)] query");
+    }
+
+    @Override
+    public boolean init(final Literal<?>[] literals, final int i, final SkriptParser.ParseResult parseResult) {
+        return true;
+    }
+
+    @Override
+    public boolean check(Event event) {
+        return (event instanceof SQLQueryCompleteEvent);
+    }
+
+    @Override
+    public String toString(Event event, boolean debug) {
+        return "complete of sql query";
+    }
+}

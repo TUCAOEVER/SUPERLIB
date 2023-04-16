@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Repuska">
+    <output-path>$PROJECT_DIR$/out/artifacts/Repuska</output-path>
+    <root id="archive" name="Repuska.jar">
+      <element id="module-output" name="SUPERLIB" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/main/resources/plugin.yml" />
+      <element id="file-copy" path="$PROJECT_DIR$/SUPERLIB.iml" />
+    </root>
+  </artifact>
+</component>
