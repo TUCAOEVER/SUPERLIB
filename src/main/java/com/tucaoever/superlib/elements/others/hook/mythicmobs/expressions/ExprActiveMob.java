@@ -43,6 +43,6 @@ public class ExprActiveMob extends SimpleExpression<ActiveMob> {
     @Override
     public boolean init(Expression<?>[] exprs, int matchedPattern, Kleenean isDelayed, SkriptParser.ParseResult parseResult) {
         this.entitySingle = (Expression<Entity>) exprs[0];
-        return true;
+        return entitySingle != null;
     }
 }

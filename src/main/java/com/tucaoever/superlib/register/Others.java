@@ -35,7 +35,6 @@ import com.tucaoever.superlib.elements.others.hook.worldguard.effects.EffManageO
 import io.lumine.mythic.bukkit.events.MythicMobDeathEvent;
 import io.lumine.mythic.bukkit.events.MythicMobSpawnEvent;
 import io.lumine.mythic.core.mobs.ActiveMob;
-import net.md_5.bungee.api.chat.BaseComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
@@ -133,14 +132,14 @@ public class Others {
         if (Bukkit.getPluginManager().isPluginEnabled("MythicMobs")) {
             SUPERLIB.log("Enabled Support For MythicMobs");
             Skript.registerExpression(ExprMobType.class, String.class, ExpressionType.PROPERTY,
-                    "mob[ ]type of %activemob%");
+                    "mobtype of %activemob%");
             Skript.registerExpression(ExprActiveMob.class, ActiveMob.class, ExpressionType.PROPERTY,
-                    "active[ ]mob (of|from) %entity%");
+                    "activemob (of|from) %entity%");
             Skript.registerExpression(ExprEntity.class, Entity.class, ExpressionType.PROPERTY,
-                    "entity (of|from) active[ ]mob %activemob%");
+                    "entity (of|from) activemob %activemob%");
             Skript.registerEffect(EffSpawnMythicMob.class,
-                    "(spawn|summon) (mythic[ ]mob[s]|active[ ]mob) %string% [at] %location%",
-                    "(spawn|summon) %number% of (mythic[ ]mob[s]|active[ ]mob) %string% [at] %location%");
+                    "(spawn|summon) (mythicmob[s]|activemob[s]) %string% [at] %location%",
+                    "(spawn|summon) %number% of (mythicmob[s]|activemob[s]) %string% [at] %location%");
             PropertyCondition.register(CondIsActiveMob.class,
                     "activemob", "entity");
 

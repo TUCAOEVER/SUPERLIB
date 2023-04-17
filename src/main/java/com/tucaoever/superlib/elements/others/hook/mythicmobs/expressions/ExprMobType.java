@@ -39,6 +39,6 @@ public class ExprMobType extends SimpleExpression<String> {
     @Override
     public boolean init(Expression<?>[] exprs, int matchedPattern, Kleenean isDelayed, SkriptParser.ParseResult parseResult) {
         activeMobSingle = (Expression<ActiveMob>) exprs[0];
-        return true;
+        return activeMobSingle != null;
     }
 }

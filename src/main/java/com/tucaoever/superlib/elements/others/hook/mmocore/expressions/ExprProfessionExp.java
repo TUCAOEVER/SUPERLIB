@@ -8,6 +8,7 @@ import ch.njol.util.Kleenean;
 import ch.njol.util.coll.CollectionUtils;
 import com.tucaoever.superlib.SUPERLIB;
 import com.tucaoever.superlib.api.Description;
+import com.tucaoever.superlib.api.Examples;
 import com.tucaoever.superlib.api.Name;
 import net.Indyuce.mmocore.MMOCore;
 import net.Indyuce.mmocore.api.player.PlayerData;
@@ -19,6 +20,7 @@ import org.bukkit.event.Event;
 
 @Name("MMOCore")
 @Description("Change MMOCore profession expression.")
+@Examples("add 10 to profession \"main\" of player")
 public class ExprProfessionExp extends SimpleExpression<Number> {
 
     private Expression<String> professionid;

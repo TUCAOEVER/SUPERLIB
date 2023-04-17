@@ -6,7 +6,7 @@ import ch.njol.skript.registrations.EventValues;
 import ch.njol.skript.util.Getter;
 import com.tucaoever.superlib.SUPERLIB;
 import com.tucaoever.superlib.elements.events.EvtPlayerChunkChange;
-import com.tucaoever.superlib.elements.events.PlayerChunkChangeEvt;
+import com.tucaoever.superlib.elements.events.listener.PlayerChunkChangeListener;
 import com.tucaoever.superlib.elements.events.TabEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
@@ -19,7 +19,7 @@ import javax.annotation.Nullable;
 
 public class Events {
     public static void register() {
-        Bukkit.getServer().getPluginManager().registerEvents(new PlayerChunkChangeEvt(), SUPERLIB.getInstance());
+        Bukkit.getServer().getPluginManager().registerEvents(new PlayerChunkChangeListener(), SUPERLIB.getInstance());
         Skript.registerEvent("chunk change", SimpleEvent.class, EvtPlayerChunkChange.class,
                 "chunk change");
         EventValues.registerEventValue(EvtPlayerChunkChange.class, Player.class,
@@ -40,6 +40,7 @@ public class Events {
                         return e.getTo();
                     }
                 }, 0);
+
         Skript.registerEvent("Tab Complete", TabEvent.class, TabCompleteEvent.class,
                 "tab complete [(of|for) %strings%]");
         EventValues.registerEventValue(TabCompleteEvent.class, Player.class, new Getter<Player, TabCompleteEvent>() {
