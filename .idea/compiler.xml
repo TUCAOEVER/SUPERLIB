@@ -10,6 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="Link2QQ-Java" target="14" />
       <module name="Repuska" target="14" />
     </bytecodeTargetLevel>
   </component>

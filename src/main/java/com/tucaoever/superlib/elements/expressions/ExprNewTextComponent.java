@@ -32,6 +32,6 @@ public class ExprNewTextComponent extends SimpleExpression<TextComponent>
 
     @Nullable
     protected TextComponent[] get(final Event e) {
-        return (TextComponent[])((this.string != null) ? new TextComponent[] { new TextComponent((String)this.string.getSingle(e)) } : null);
+        return (this.string != null) ? new TextComponent[] { new TextComponent(this.string.getSingle(e)) } : null;
     }
 }

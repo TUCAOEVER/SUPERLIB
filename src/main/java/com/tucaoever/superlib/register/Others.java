@@ -27,10 +27,7 @@ import com.tucaoever.superlib.elements.others.hook.mythicmobs.expressions.ExprEn
 import com.tucaoever.superlib.elements.others.hook.mythicmobs.expressions.ExprMobType;
 import com.tucaoever.superlib.elements.others.hook.placeholderapi.PlaceholderAPIEvent;
 import com.tucaoever.superlib.elements.others.hook.placeholderapi.events.EvtPlaceholderRequest;
-import com.tucaoever.superlib.elements.others.hook.placeholderapi.expressions.ExprIdentifier;
-import com.tucaoever.superlib.elements.others.hook.placeholderapi.expressions.ExprPlaceholder;
-import com.tucaoever.superlib.elements.others.hook.placeholderapi.expressions.ExprPrefix;
-import com.tucaoever.superlib.elements.others.hook.placeholderapi.expressions.ExprResult;
+import com.tucaoever.superlib.elements.others.hook.placeholderapi.expressions.*;
 import com.tucaoever.superlib.elements.others.hook.worldguard.effects.EffManageOwner;
 import io.lumine.mythic.bukkit.events.MythicMobDeathEvent;
 import io.lumine.mythic.bukkit.events.MythicMobSpawnEvent;
@@ -84,13 +81,14 @@ public class Others {
         }
         if (Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
             SUPERLIB.log("Enabled Support For PlaceholderAPI");
+            Skript.registerExpression(ExprParse.class, String.class, ExpressionType.SIMPLE,
+                    "[the] (placeholder[api]|papi) parse (string[s]|text) %strings% [(from|of) %offlineplayer%]");
             Skript.registerExpression(ExprPrefix.class, String.class, ExpressionType.SIMPLE,
                     "[the] [(placeholder[api]|papi)] (prefix|placeholder)");
             Skript.registerExpression(ExprIdentifier.class, String.class, ExpressionType.SIMPLE,
                     "[the] [(placeholder[api]|papi)] identifier");
             Skript.registerExpression(ExprPlaceholder.class, String.class, ExpressionType.SIMPLE,
-                    "[the] ([value of] placeholder[s]|placeholder [value] [of]) %strings% [from %players%]",
-                    "parse placeholder[s] %strings% [(for|as) %players%]");
+                    "[the] ([value of] placeholder[s]|placeholder [value] [of]) %strings% [from %players%]");
             Skript.registerExpression(ExprResult.class, String.class, ExpressionType.SIMPLE,
                     "[the] [(placeholder[api]|papi)] result");
             Skript.registerEvent("Placeholder Request", EvtPlaceholderRequest.class, PlaceholderAPIEvent.class,
