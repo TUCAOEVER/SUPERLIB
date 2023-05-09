@@ -89,7 +89,7 @@ public class EffBoundHoloObject extends Effect
             }
         }
         hologram.appendTextLine(core);
-        if (!HoloManager.addToHoloMap(((String)this.id.getSingle(evt)).replace("\"", ""), hologram)) {
+        if (HoloManager.addToHoloMap(((String) this.id.getSingle(evt)).replace("\"", ""), hologram)) {
             hologram.delete();
         }
         else {

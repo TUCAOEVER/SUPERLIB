@@ -109,7 +109,7 @@ public class EffCreateInteractiveStaticHolograms extends Effect
                 Bukkit.getPluginManager().callEvent((Event)event);
             }
         });
-        if (!HoloManager.addToHoloMap(((String)this.id.getSingle(evt)).replace("\"", ""), hologram)) {
+        if (HoloManager.addToHoloMap(((String) this.id.getSingle(evt)).replace("\"", ""), hologram)) {
             hologram.delete();
         }
     }

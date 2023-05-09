@@ -82,7 +82,7 @@ public class EffBoundClientSideHoloObject extends Effect
                     final Material mat = Material.valueOf(line.toUpperCase().replace(" ", "_"));
                     stack = new ItemStack(mat, 1);
                     if (meta != 0) {
-                        stack = new ItemStack(mat, 1, (short)(byte)meta);
+                        stack = new ItemStack(mat, 1, (byte)meta);
                     }
                 }
                 catch (IllegalArgumentException exception2) {
@@ -96,12 +96,12 @@ public class EffBoundClientSideHoloObject extends Effect
             }
         }
         hologram.appendTextLine(core);
-        if (!HoloManager.addToHoloMap(((String)this.id.getSingle(evt)).replace("\"", ""), hologram)) {
+        if (HoloManager.addToHoloMap(this.id.getSingle(evt).replace("\"", ""), hologram)) {
             hologram.delete();
         }
         else {
-            final String tid = ((String)this.id.getSingle(evt)).replace("\"", "");
-            HoloManager.followEntity((Entity)this.tar.getSingle(evt), tid, hx, hy, hz);
+            final String tid = this.id.getSingle(evt).replace("\"", "");
+            HoloManager.followEntity(this.tar.getSingle(evt), tid, hx, hy, hz);
         }
     }
 }

@@ -101,7 +101,7 @@ public class EffCreateStaticHoloObject extends Effect
                 Bukkit.getPluginManager().callEvent((Event)event);
             }
         });
-        if (!HoloManager.addToHoloMap(((String)this.id.getSingle(evt)).replace("\"", ""), hologram)) {
+        if (HoloManager.addToHoloMap(this.id.getSingle(evt).replace("\"", ""), hologram)) {
             hologram.delete();
         }
     }

@@ -31,11 +31,11 @@ public class ExprGetHoloLine extends SimpleExpression<String>
     
     @Nullable
     protected String[] get(final Event evt) {
-        if (HoloManager.getFromHoloMap(((String)this.id.getSingle(evt)).replace("\"", "")) == null) {
+        if (HoloManager.getFromHoloMap(this.id.getSingle(evt).replace("\"", "")) == null) {
             return new String[1];
         }
         final Hologram hologram = HoloManager.getFromHoloMap(((String)this.id.getSingle(evt)).replace("\"", ""));
-        String finalLine = hologram.getLine(((Number)this.line.getSingle(evt)).intValue()).toString();
+        String finalLine = hologram.getLine(this.line.getSingle(evt).intValue()).toString();
         if (finalLine.indexOf("text=") != -1) {
             finalLine = finalLine.substring(finalLine.indexOf("text=") + 5, finalLine.indexOf("]"));
             return new String[] { finalLine };

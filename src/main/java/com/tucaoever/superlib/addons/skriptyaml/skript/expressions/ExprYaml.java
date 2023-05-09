@@ -53,8 +53,8 @@ public class ExprYaml<T> extends SimpleExpressionFork<T> {
 
 	static {
 		Skript.registerExpression(ExprYaml.class, Object.class, ExpressionType.SIMPLE,
-				"[[skript-]y[a]ml] (1¦value|2¦(node|path) list|3¦(node|path)[s with] key[s]|4¦list) %string% (of|in|from) %string% [without string checks]");
-		//"[[skript-]y[a]ml] (1¦value|2¦(node|path) list|3¦(node|path)[s with] key[s]|4¦list) %string% (of|in|from) %string% [without string checks] [using %-object% as default]"
+				"[[skript-]y[a]ml] (1¦value|2¦(node|path) list|3¦(node|path)[s with] key[s]|4¦list) %string% (of|in|from) %string%",
+		"[[skript-]y[a]ml] (1¦value|2¦(node|path) list|3¦(node|path)[s with] key[s]|4¦list) %string% (of|in|from) %string% without string check[s]");
 	}
 
 	private boolean checks = false;
@@ -124,7 +124,7 @@ public class ExprYaml<T> extends SimpleExpressionFork<T> {
 
 	@Override
 	public boolean isSingle() {
-		return state == YamlState.VALUE ? true : false;
+		return state == YamlState.VALUE;
 	}
 
 	@Override
@@ -163,7 +163,7 @@ public class ExprYaml<T> extends SimpleExpressionFork<T> {
 				try {
 					return SkriptYamlUtils.convertToArray(o, (Class<T>) o.getClass());
 				} catch (ClassCastException e) {
-					return (T[]) Array.newInstance((Class<T>) o.getClass(), 0);
+					return (T[]) Array.newInstance(o.getClass(), 0);
 				}
 			}
 			return null;
@@ -435,10 +435,8 @@ public class ExprYaml<T> extends SimpleExpressionFork<T> {
 			state = YamlState.LIST;
 		node = (Expression<String>) e[0];
 		file = (Expression<String>) e[1];
-		if (parse.expr.toLowerCase().endsWith(" without string checks"))
-			this.checks = true;
+		if (matchedPattern == 1) this.checks = true;
 		this.skriptNode = new SkriptNode(SkriptLogger.getNode());
-
 		return true;
 	}
 
