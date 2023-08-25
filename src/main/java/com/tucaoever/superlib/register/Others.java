@@ -28,7 +28,6 @@ import com.tucaoever.superlib.elements.others.hook.mythicmobs.expressions.ExprMo
 import com.tucaoever.superlib.elements.others.hook.placeholderapi.PlaceholderAPIEvent;
 import com.tucaoever.superlib.elements.others.hook.placeholderapi.events.EvtPlaceholderRequest;
 import com.tucaoever.superlib.elements.others.hook.placeholderapi.expressions.*;
-import com.tucaoever.superlib.elements.others.hook.worldguard.effects.EffManageOwner;
 import io.lumine.mythic.bukkit.events.MythicMobDeathEvent;
 import io.lumine.mythic.bukkit.events.MythicMobSpawnEvent;
 import io.lumine.mythic.core.mobs.ActiveMob;
@@ -41,11 +40,6 @@ import org.jetbrains.annotations.NotNull;
 
 public class Others {
     public static void register() {
-        if (Bukkit.getPluginManager().isPluginEnabled("WorldGuard")) {
-            SUPERLIB.log("Enabled Support For WorldGuard");
-            Skript.registerEffect(EffManageOwner.class,
-                    "[worldguard] (0¦add|1¦remove) owner[s] %players% from region %string% in [world] %world%");
-        }
         if (Bukkit.getPluginManager().isPluginEnabled("HolographicDisplays")) {
             SUPERLIB.log("Enabled Support For HolographicDisplays");
             Skript.registerEffect(EffCreateStaticHoloObject.class,
@@ -119,20 +113,20 @@ public class Others {
         if (Bukkit.getPluginManager().isPluginEnabled("MMOItems")) {
             SUPERLIB.log("Enabled Support For MMOItems");
             Skript.registerExpression(ExprItem.class, ItemStack.class, ExpressionType.COMBINED,
-                    "[the] mmoitem [with] type %string% [([and ]with)] id %string%");
+                    "[the] mmoitem[s] [with] type %string% [([and ]with)] id %string%");
             Skript.registerExpression(ExprId.class, String.class, ExpressionType.PROPERTY,
-                    "[the] mmoitem id of %itemstack%");
+                    "[the] mmoitem[s] id of %itemstack%");
             Skript.registerExpression(ExprType.class, String.class, ExpressionType.PROPERTY,
-                    "[the] mmoitem type of %itemstack%");
+                    "[the] mmoitem[s] type of %itemstack%");
             PropertyCondition.register(CondIsItem.class,
                     "mmoitem[s]", "itemstack");
         }
         if (Bukkit.getPluginManager().isPluginEnabled("MythicMobs")) {
             SUPERLIB.log("Enabled Support For MythicMobs");
             Skript.registerExpression(ExprMobType.class, String.class, ExpressionType.PROPERTY,
-                    "mobtype of %activemob%");
+                    "mob[-]type of %activemob%");
             Skript.registerExpression(ExprActiveMob.class, ActiveMob.class, ExpressionType.PROPERTY,
-                    "activemob (of|from) %entity%");
+                    "active[-]mob (of|from) %entity%");
             Skript.registerExpression(ExprEntity.class, Entity.class, ExpressionType.PROPERTY,
                     "entity (of|from) activemob %activemob%");
             Skript.registerEffect(EffSpawnMythicMob.class,

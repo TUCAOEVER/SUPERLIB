@@ -5,9 +5,9 @@ import ch.njol.skript.lang.util.SimpleEvent;
 import ch.njol.skript.registrations.EventValues;
 import ch.njol.skript.util.Getter;
 import com.tucaoever.superlib.SUPERLIB;
-import com.tucaoever.superlib.elements.events.EvtPlayerChunkChange;
-import com.tucaoever.superlib.elements.events.listener.PlayerChunkChangeListener;
-import com.tucaoever.superlib.elements.events.TabEvent;
+import com.tucaoever.superlib.elements.events.EvtChunkChange;
+import com.tucaoever.superlib.elements.events.ChunkChangeListener;
+import com.tucaoever.superlib.elements.events.EvtTabComplete;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.command.CommandSender;
@@ -19,29 +19,29 @@ import javax.annotation.Nullable;
 
 public class Events {
     public static void register() {
-        Bukkit.getServer().getPluginManager().registerEvents(new PlayerChunkChangeListener(), SUPERLIB.getInstance());
-        Skript.registerEvent("chunk change", SimpleEvent.class, EvtPlayerChunkChange.class,
+        Bukkit.getServer().getPluginManager().registerEvents(new ChunkChangeListener(), SUPERLIB.getInstance());
+        Skript.registerEvent("chunk change", SimpleEvent.class, EvtChunkChange.class,
                 "chunk change");
-        EventValues.registerEventValue(EvtPlayerChunkChange.class, Player.class,
-                new Getter<Player, EvtPlayerChunkChange>() {
-                    public Player get(final EvtPlayerChunkChange e) {
+        EventValues.registerEventValue(EvtChunkChange.class, Player.class,
+                new Getter<Player, EvtChunkChange>() {
+                    public Player get(final EvtChunkChange e) {
                         return e.getPlayer();
                     }
                 }, 0);
-        EventValues.registerEventValue(EvtPlayerChunkChange.class, Chunk.class,
-                new Getter<Chunk, EvtPlayerChunkChange>() {
-                    public Chunk get(final EvtPlayerChunkChange e) {
+        EventValues.registerEventValue(EvtChunkChange.class, Chunk.class,
+                new Getter<Chunk, EvtChunkChange>() {
+                    public Chunk get(final EvtChunkChange e) {
                         return e.getFrom();
                     }
                 }, 0);
-        EventValues.registerEventValue(EvtPlayerChunkChange.class, Chunk.class,
-                new Getter<Chunk, EvtPlayerChunkChange>() {
-                    public Chunk get(final EvtPlayerChunkChange e) {
+        EventValues.registerEventValue(EvtChunkChange.class, Chunk.class,
+                new Getter<Chunk, EvtChunkChange>() {
+                    public Chunk get(final EvtChunkChange e) {
                         return e.getTo();
                     }
                 }, 0);
 
-        Skript.registerEvent("Tab Complete", TabEvent.class, TabCompleteEvent.class,
+        Skript.registerEvent("Tab Complete", EvtTabComplete.class, TabCompleteEvent.class,
                 "tab complete [(of|for) %strings%]");
         EventValues.registerEventValue(TabCompleteEvent.class, Player.class, new Getter<Player, TabCompleteEvent>() {
             @Nullable

@@ -8,7 +8,6 @@ import com.tucaoever.superlib.addons.skriptyaml.utils.versions.SkriptAdapter;
 import com.tucaoever.superlib.addons.skriptyaml.utils.versions.V2_6;
 import com.tucaoever.superlib.addons.skriptyaml.utils.yaml.SkriptYamlConstructor;
 import com.tucaoever.superlib.addons.skriptyaml.utils.yaml.SkriptYamlRepresenter;
-import com.tucaoever.superlib.elements.others.gui.GUIManager;
 import com.tucaoever.superlib.elements.others.scoreboard.ScoreBoardManager;
 import com.tucaoever.superlib.register.*;
 import com.tucaoever.superlib.util.NBT.NBTApi;
@@ -28,9 +27,8 @@ import static com.tucaoever.superlib.addons.skriptmirror.util.SkriptReflection.d
 
 public class SUPERLIB extends JavaPlugin {
 
-    private static final GUIManager manager = new GUIManager();
     public static ScoreBoardManager scoreboardManager;
-    private static NBTApi NBT_API;
+    private static NBTApi nbtApi;
     private static SUPERLIB instance;
     private static SkriptYamlRepresenter representer;
     private static SkriptYamlConstructor constructor;
@@ -41,9 +39,6 @@ public class SUPERLIB extends JavaPlugin {
         return instance;
     }
 
-    public static GUIManager getGUIManager() {
-        return manager;
-    }
 
     public static String getDefaultPath(final String pth) {
         final String dp = Paths.get("").normalize().toAbsolutePath().toString();
@@ -112,8 +107,7 @@ public class SUPERLIB extends JavaPlugin {
         // Disable *all* and/or warnings
         disableAndOrWarnings();
 
-        if (!Bukkit.getPluginManager().isPluginEnabled("SkBee")) NBT_API = new NBTApi();
-
+        nbtApi = new NBTApi();
         scoreboardManager = new ScoreBoardManager(this);
         representer = new SkriptYamlRepresenter();
         constructor = new SkriptYamlConstructor();
@@ -126,7 +120,7 @@ public class SUPERLIB extends JavaPlugin {
     }
 
     public NBTApi getNbtApi() {
-        return NBT_API;
+        return nbtApi;
     }
 
     public SkriptYamlRepresenter getRepresenter() {

@@ -30,7 +30,7 @@ public class ExprSubList<T> extends WrapperExpression<T> {
     private int pattern;
 
     @Override
-    protected T[] get(@NotNull Event e) {
+    protected T @NotNull [] get(@NotNull Event e) {
         Number n1 = numberExpr1.getSingle(e), n2 = numberExpr2 == null ? null : numberExpr2.getSingle(e);
         T[] array = super.get(e);
         return switch (pattern) {

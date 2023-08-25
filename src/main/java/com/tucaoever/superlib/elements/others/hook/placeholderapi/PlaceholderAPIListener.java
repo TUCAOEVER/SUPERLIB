@@ -4,11 +4,12 @@ import com.tucaoever.superlib.SUPERLIB;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 public class PlaceholderAPIListener extends PlaceholderExpansion {
 
-    private SUPERLIB plugin;
-    private String prefix;
+    private final SUPERLIB plugin;
+    private final String prefix;
 
     public PlaceholderAPIListener(SUPERLIB plugin, String prefix) {
         this.plugin = plugin;
@@ -16,22 +17,27 @@ public class PlaceholderAPIListener extends PlaceholderExpansion {
     }
 
     @Override
-    public String getIdentifier() {
+    public boolean persist() {
+        return true;
+    }
+
+    @Override
+    public @NotNull String getIdentifier() {
         return prefix;
     }
 
     @Override
-    public String getAuthor() {
+    public @NotNull String getAuthor() {
         return plugin.getDescription().getAuthors().toString();
     }
 
     @Override
-    public String getVersion() {
+    public @NotNull String getVersion() {
         return plugin.getDescription().getVersion();
     }
 
     @Override
-    public String onPlaceholderRequest(Player player, String identifier) {
+    public String onPlaceholderRequest(Player player, @NotNull String identifier) {
         PlaceholderAPIEvent event = new PlaceholderAPIEvent(identifier, player, prefix);
         Bukkit.getPluginManager().callEvent(event);
         return event.getResult();

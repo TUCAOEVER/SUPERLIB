@@ -8,6 +8,7 @@ import com.tucaoever.superlib.api.Description;
 import com.tucaoever.superlib.api.Examples;
 import io.lumine.mythic.core.mobs.ActiveMob;
 import org.bukkit.event.Event;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 @Description("get internal name of active mob")
@@ -21,23 +22,23 @@ public class ExprMobType extends SimpleExpression<String> {
     }
 
     @Override
-    public Class<? extends String> getReturnType() {
+    public @NotNull Class<? extends String> getReturnType() {
         return String.class;
     }
 
     @Override
-    public String toString(@Nullable Event event, boolean debug) {
-        return null;
+    public @NotNull String toString(@Nullable Event event, boolean debug) {
+        return "internal name " + activeMobSingle.getSingle(event).getMobType();
     }
 
     @Override
-    protected @Nullable String[] get(Event e) {
+    protected String @NotNull [] get(@NotNull Event event) {
         return new String[]{
-                activeMobSingle.getSingle(e).getMobType()};
+                activeMobSingle.getSingle(event).getMobType()};
     }
 
     @Override
-    public boolean init(Expression<?>[] exprs, int matchedPattern, Kleenean isDelayed, SkriptParser.ParseResult parseResult) {
+    public boolean init(Expression<?>[] exprs, int matchedPattern, @NotNull Kleenean isDelayed, SkriptParser.ParseResult parseResult) {
         activeMobSingle = (Expression<ActiveMob>) exprs[0];
         return activeMobSingle != null;
     }
