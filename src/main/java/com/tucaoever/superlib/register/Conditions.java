@@ -3,10 +3,6 @@ package com.tucaoever.superlib.register;
 import ch.njol.skript.Skript;
 import com.tucaoever.superlib.elements.conditions.CondOperations;
 import com.tucaoever.superlib.elements.others.file.conditions.CondFileExists;
-import com.tucaoever.superlib.elements.others.gui.conditions.CondHasGUI;
-import com.tucaoever.superlib.elements.others.gui.sections.SecCreateGUI;
-import com.tucaoever.superlib.elements.others.gui.sections.SecMakeGUI;
-import com.tucaoever.superlib.elements.others.gui.sections.SecOnCloseGUI;
 import com.tucaoever.superlib.elements.others.scoreboard.conditions.CondIsScoreboardSet;
 
 public class Conditions {
