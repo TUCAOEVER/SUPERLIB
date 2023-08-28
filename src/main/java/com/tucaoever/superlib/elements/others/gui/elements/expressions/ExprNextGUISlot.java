@@ -6,13 +6,12 @@ import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
 import ch.njol.skript.lang.Expression;
-import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SectionSkriptEvent;
 import ch.njol.skript.lang.SkriptEvent;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
-import com.tucaoever.superlib.elements.others.gui.SkriptGUI;
+import com.tucaoever.superlib.SUPERLIB;
 import com.tucaoever.superlib.elements.others.gui.elements.sections.SecCreateGUI;
 import com.tucaoever.superlib.elements.others.gui.elements.sections.SecGUIOpenClose;
 import com.tucaoever.superlib.elements.others.gui.elements.sections.SecMakeGUI;
@@ -29,14 +28,6 @@ public class ExprNextGUISlot extends SimpleExpression<Character> {
 
 	@Nullable
 	private Expression<GUI> guis;
-
-	static {
-		Skript.registerExpression(ExprNextGUISlot.class, Character.class, ExpressionType.SIMPLE,
-				"%guiinventorys%'[s] next gui slot[s]",
-				"[the] next gui slot[s] of %guiinventorys%",
-				"[the] next gui slot"
-		);
-	}
 
 	@Override
 	@SuppressWarnings("unchecked")
@@ -59,7 +50,7 @@ public class ExprNextGUISlot extends SimpleExpression<Character> {
 	@Nullable
 	protected Character[] get(Event e) {
 		if (guis == null) {
-			GUI gui = SkriptGUI.getGUIManager().getGUI(e);
+			GUI gui = SUPERLIB.getGUIManager().getGUI(e);
 			if (gui != null) {
 				return new Character[]{gui.nextSlot()};
 			}

@@ -1,10 +1,9 @@
 package com.tucaoever.superlib.elements.others.gui.elements.conditions;
 
-import com.tucaoever.superlib.elements.others.gui.SkriptGUI;
+import com.tucaoever.superlib.SUPERLIB;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 
-import ch.njol.skript.Skript;
 import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
@@ -25,13 +24,6 @@ import org.jetbrains.annotations.NotNull;
 @Since("1.0.0")
 public class CondHasGUI extends Condition {
 
-	static {
-		Skript.registerCondition(CondHasGUI.class,
-				"%players% (has|have) a gui [open]",
-				"%players% (doesn't|does not|do not|don't) have a gui [open]"
-		);
-	}
-
 	@SuppressWarnings("NotNullFieldNotInitialized")
 	private Expression<Player> players;
 
@@ -45,7 +37,7 @@ public class CondHasGUI extends Condition {
 
 	@Override
 	public boolean check(Event e) {
-		return players.check(e, p -> SkriptGUI.getGUIManager().hasGUI(p), isNegated());
+		return players.check(e, p -> SUPERLIB.getGUIManager().hasGUI(p), isNegated());
 	}
 
 	@Override

@@ -5,8 +5,7 @@ import ch.njol.skript.expressions.base.PropertyExpression;
 import com.tucaoever.superlib.elements.effects.*;
 import com.tucaoever.superlib.elements.others.file.effects.EffCreateFile;
 import com.tucaoever.superlib.elements.others.file.effects.EffDeleteFile;
-import com.tucaoever.superlib.elements.others.gui.effects.EffCancelGUIClose;
-import com.tucaoever.superlib.elements.others.gui.effects.EffOpenGUI;
+import com.tucaoever.superlib.elements.others.gui.elements.effects.EffCancelGUIClose;
 import com.tucaoever.superlib.elements.others.json.EffJSONToVariable;
 import com.tucaoever.superlib.elements.others.json.ExprJSONToString;
 import com.tucaoever.superlib.elements.others.nbt.effects.EffSaveNBTFile;
@@ -34,8 +33,7 @@ public class Effects {
                 "delete (0¦(script|program|app[lication]|[zip ]file)|1¦dir[ectory]) %string%");
         Skript.registerEffect(EffCancelGUIClose.class,
                 "(0¦cancel|1¦uncancel) [the] gui clos(e|ing)");
-        Skript.registerEffect(EffOpenGUI.class,
-                "(open|show) [[skript[-]]gui] %guiinventory% (to|for) %players%");
+
         Skript.registerEffect(EffLoadChunk.class,
                 "(0¦load|1¦unload) chunk %chunk%");
         Skript.registerEffect(EffNameOfScore.class,
@@ -57,28 +55,22 @@ public class Effects {
                 "(delete|remove) %player% from group [id based] score %string%");
         Skript.registerEffect(EffDelGroupIdScore.class,
                 "(delete|remove) score[s] [with] group id %string%");
-        if (!Bukkit.getPluginManager().isPluginEnabled("SkBee")) {
-            Skript.registerEffect(EffSaveNBTFile.class,
-                    "save nbt file[s] (for|of) %nbtcompounds%");
-            if (Skript.classExists("org.bukkit.block.data.BlockData") && Skript.classExists("ch.njol.skript.expressions.ExprBlockData")) {
-                Skript.registerEffect(EffSetBlockNBT.class,
-                        "set (nbt[(-| )]block|tile[(-| )]entity) %directions% %locations% to %itemtype/blockdata% with nbt %string/nbtcompound%");
-            } else {
-                Skript.registerEffect(EffSetBlockNBT.class,
-                        "set (nbt[(-| )]block|tile[(-| )]entity) %directions% %locations% to %itemtype% with nbt %string/nbtcompound%");
-            }
-            Skript.registerEffect(EffSpawnEntityNBT.class,
-                    "spawn %entitytypes% [%directions% %locations%] with nbt %string/nbtcompound%",
-                    "spawn %number% of %entitytypes% [%directions% %locations%] with nbt %string/nbtcompound%");
-
-            Skript.registerEffect(EffAddClickEvent.class,
-                    "add click event with action %clickeventaction% (and|with|to) [(execute|text|link)] %string% to [text component] %textcomponent%");
-            Skript.registerEffect(EffAddComponentToPage.class,
-                    "add text component %textcomponents% to [book] %itemstack%");
-            Skript.registerEffect(EffAddHoverEvent.class,
-                    "add hover event with action %hovereventaction% (and|with) [(value|text)] %string% to [text component] %textcomponent%");
-            Skript.registerEffect(EffMessageTextComponent.class,
-                    "message text component %textcomponent% to %players%");
-        }
+        Skript.registerEffect(EffCancelGUIClose.class,
+                "(cancel|1¦uncancel) [the] gui clos(e|ing)");
+        Skript.registerEffect(EffSaveNBTFile.class,
+                "save nbt file[s] (for|of) %nbtcompounds%");
+        Skript.registerEffect(EffSetBlockNBT.class,
+                "set (nbt[(-| )]block|tile[(-| )]entity) %directions% %locations% to %itemtype/blockdata% with nbt %string/nbtcompound%");
+        Skript.registerEffect(EffSpawnEntityNBT.class,
+                "spawn %entitytypes% [%directions% %locations%] with nbt %string/nbtcompound%",
+                "spawn %number% of %entitytypes% [%directions% %locations%] with nbt %string/nbtcompound%");
+        Skript.registerEffect(EffAddClickEvent.class,
+                "add click event with action %clickeventaction% (and|with|to) [(execute|text|link)] %string% to [text component] %textcomponent%");
+        Skript.registerEffect(EffAddComponentToPage.class,
+                "add text component %textcomponents% to [book] %itemstack%");
+        Skript.registerEffect(EffAddHoverEvent.class,
+                "add hover event with action %hovereventaction% (and|with) [(value|text)] %string% to [text component] %textcomponent%");
+        Skript.registerEffect(EffMessageTextComponent.class,
+                "message text component %textcomponent% to %players%");
     }
 }

@@ -11,7 +11,7 @@ import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
 import ch.njol.skript.lang.TriggerItem;
 import ch.njol.util.Kleenean;
-import com.tucaoever.superlib.elements.others.gui.SkriptGUI;
+import com.tucaoever.superlib.SUPERLIB;
 import com.tucaoever.superlib.elements.others.gui.elements.expressions.ExprVirtualInventory;
 import com.tucaoever.superlib.elements.others.gui.gui.GUI;
 import org.bukkit.event.Event;
@@ -30,13 +30,6 @@ import java.util.List;
 })
 @Since("1.0.0")
 public class SecCreateGUI extends EffectSection {
-
-	static {
-		Skript.registerSection(SecCreateGUI.class,
-				"create [a] [new] gui [[with id[entifier]] %-string%] with %inventory% [removable:(and|with) ([re]move[e]able|stealable) items] [(and|with) shape %-strings%]",
-				"(change|edit) [gui] %guiinventory%"
-		);
-	}
 
 	private boolean inception;
 
@@ -86,7 +79,7 @@ public class SecCreateGUI extends EffectSection {
 
 			InventoryType invType = inv.getType();
 			if (invType == InventoryType.CRAFTING || invType == InventoryType.PLAYER) { // We don't want to run this section as this is an invalid GUI type
-				SkriptGUI.getInstance().getLogger().warning("Unable to create an inventory of type: " + invType.name());
+				SUPERLIB.warn("Unable to create an inventory of type: " + invType.name());
 				return walk(e, false);
 			}
 
@@ -104,9 +97,9 @@ public class SecCreateGUI extends EffectSection {
 
 			String id = this.id != null ? this.id.getSingle(e) : null;
 			if (id != null && !id.isEmpty()) {
-				GUI old = SkriptGUI.getGUIManager().getGUI(id);
+				GUI old = SUPERLIB.getGUIManager().getGUI(id);
 				if (old != null) { // We are making a new GUI with this ID (see https://github.com/APickledWalrus/skript-gui/issues/72)
-					SkriptGUI.getGUIManager().unregister(old);
+					SUPERLIB.getGUIManager().unregister(old);
 				}
 				gui.setID(id);
 			}
@@ -116,15 +109,15 @@ public class SecCreateGUI extends EffectSection {
 		}
 
 		if (!inception) { // No sort of inception going on, just do the regular stuff
-			SkriptGUI.getGUIManager().setGUI(e, gui);
+			SUPERLIB.getGUIManager().setGUI(e, gui);
 			return walk(e, true);
 		}
 
 		// We need to switch the event GUI for the creation section
-		GUI currentGUI = SkriptGUI.getGUIManager().getGUI(e);
+		GUI currentGUI = SUPERLIB.getGUIManager().getGUI(e);
 
 		if (currentGUI == null) { // No current GUI, treat as normal
-			SkriptGUI.getGUIManager().setGUI(e, gui);
+			SUPERLIB.getGUIManager().setGUI(e, gui);
 			return walk(e, true);
 		}
 
@@ -132,7 +125,7 @@ public class SecCreateGUI extends EffectSection {
 			return walk(e, false);
 		}
 
-		SkriptGUI.getGUIManager().setGUI(e, gui);
+		SUPERLIB.getGUIManager().setGUI(e, gui);
 
 		assert first != null && last != null;
 		TriggerItem lastNext = last.getNext();
@@ -143,7 +136,7 @@ public class SecCreateGUI extends EffectSection {
 		// Switch back to the old GUI since we are returning to the previous GUI section
 		// TODO the downside here is that "open last gui" may not always work as expected!
 		// Unsurprisingly, creation section inception is annoying!
-		SkriptGUI.getGUIManager().setGUI(e, currentGUI);
+		SUPERLIB.getGUIManager().setGUI(e, currentGUI);
 
 		// Don't run the section, we ran it above if needed
 		return walk(e, false);

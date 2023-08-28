@@ -10,10 +10,9 @@ import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
 import ch.njol.util.Kleenean;
 import ch.njol.util.coll.CollectionUtils;
-import com.tucaoever.superlib.elements.others.gui.SkriptGUI;
+import com.tucaoever.superlib.SUPERLIB;
 import com.tucaoever.superlib.elements.others.gui.gui.GUI;
 import org.bukkit.event.Event;
-import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
@@ -28,10 +27,6 @@ import javax.annotation.Nullable;
 })
 @Since("1.0.0, 1.3 (rework, support outside of edit sections)")
 public class ExprGUIProperties extends SimplePropertyExpression<GUI, Object> {
-
-	static {
-		register(ExprGUIProperties.class, Object.class, "(0¦[skript-gui] name[s]|1¦(size[s]|rows)|2¦shape[s]|3¦lock status[es])", "guiinventorys");
-	}
 
 	private static final int NAME = 0, ROWS = 1, SHAPE = 2, LOCK_STATUS = 3;
 	private int property;
@@ -84,7 +79,7 @@ public class ExprGUIProperties extends SimplePropertyExpression<GUI, Object> {
 		if (delta == null || (mode != ChangeMode.SET && mode != ChangeMode.RESET)) {
 			return;
 		}
-		GUI gui = SkriptGUI.getGUIManager().getGUI(e);
+		GUI gui = SUPERLIB.getGUIManager().getGUI(e);
 		if (gui != null) {
 			switch (mode) {
 				case SET:

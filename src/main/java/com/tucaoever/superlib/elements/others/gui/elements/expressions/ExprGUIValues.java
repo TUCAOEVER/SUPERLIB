@@ -8,14 +8,13 @@ import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
 import ch.njol.skript.lang.Expression;
-import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SectionSkriptEvent;
 import ch.njol.skript.lang.SkriptEvent;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
 import ch.njol.util.coll.CollectionUtils;
-import com.tucaoever.superlib.elements.others.gui.SkriptGUI;
+import com.tucaoever.superlib.SUPERLIB;
 import com.tucaoever.superlib.elements.others.gui.elements.sections.SecCreateGUI;
 import com.tucaoever.superlib.elements.others.gui.elements.sections.SecGUIOpenClose;
 import com.tucaoever.superlib.elements.others.gui.elements.sections.SecMakeGUI;
@@ -43,24 +42,6 @@ import javax.annotation.Nullable;
 })
 @Since("1.0.0")
 public class ExprGUIValues extends SimpleExpression<Object> {
-
-	static {
-		Skript.registerExpression(ExprGUIValues.class, Object.class, ExpressionType.SIMPLE,
-				"[the] gui slot",
-				"[the] gui raw slot",
-				"[the] gui hotbar slot",
-				"[the] gui inventory",
-				"[the] gui inventory action",
-				"[the] gui click (type|action)",
-				"[the] gui cursor [item]",
-				"[the] gui [(clicked|current)] item",
-				"[the] gui slot type",
-				"[the] gui player",
-				"[the] gui (viewer|player)s",
-				"[the] gui slot id",
-				"[the] gui"
-		);
-	}
 
 	private int pattern;
 	private boolean isDelayed;
@@ -95,7 +76,7 @@ public class ExprGUIValues extends SimpleExpression<Object> {
 	@Override
 	protected Object[] get(Event event) {
 		if (pattern == 12) {
-			GUI gui = SkriptGUI.getGUIManager().getGUI(event);
+			GUI gui = SUPERLIB.getGUIManager().getGUI(event);
 			return gui != null ? new GUI[]{gui} : new GUI[0];
 		}
 
@@ -139,7 +120,7 @@ public class ExprGUIValues extends SimpleExpression<Object> {
 				case 10:
 					return e.getViewers().toArray(new HumanEntity[0]);
 				case 11:
-					GUI gui = SkriptGUI.getGUIManager().getGUI(event);
+					GUI gui = SUPERLIB.getGUIManager().getGUI(event);
 					return gui != null ? new String[]{"" + gui.convert(e.getSlot())} : new GUI[0];
 			}
 		}

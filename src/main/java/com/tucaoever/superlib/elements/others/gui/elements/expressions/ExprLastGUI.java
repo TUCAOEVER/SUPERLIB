@@ -1,21 +1,20 @@
 package com.tucaoever.superlib.elements.others.gui.elements.expressions;
 
 import ch.njol.skript.lang.util.SimpleExpression;
-import com.tucaoever.superlib.elements.others.gui.SkriptGUI;
+import com.tucaoever.superlib.SUPERLIB;
 import com.tucaoever.superlib.elements.others.gui.gui.GUI;
 import org.bukkit.event.Event;
 
-import ch.njol.skript.Skript;
 import ch.njol.skript.classes.Changer.ChangeMode;
 import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
 import ch.njol.skript.lang.Expression;
-import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
 import ch.njol.util.Kleenean;
 import ch.njol.util.coll.CollectionUtils;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
@@ -27,13 +26,6 @@ import javax.annotation.Nullable;
 })
 @Since("1.0.0")
 public class ExprLastGUI extends SimpleExpression<GUI> {
-
-	static {
-		Skript.registerExpression(ExprLastGUI.class, GUI.class, ExpressionType.SIMPLE,
-				"[the] (last[ly] [(created|edited)]|(created|edited)) gui",
-				"[the] gui [with [the] id[entifier]] %string%"
-		);
-	}
 
 	@Nullable
 	private Expression<String> id;
@@ -51,9 +43,9 @@ public class ExprLastGUI extends SimpleExpression<GUI> {
 	protected GUI[] get(Event e) {
 		if (id != null) {
 			String id = this.id.getSingle(e);
-			return id != null ? new GUI[]{SkriptGUI.getGUIManager().getGUI(id)} : new GUI[0];
+			return id != null ? new GUI[]{SUPERLIB.getGUIManager().getGUI(id)} : new GUI[0];
 		}
-		return new GUI[]{SkriptGUI.getGUIManager().getGUI(e)};
+		return new GUI[]{SUPERLIB.getGUIManager().getGUI(e)};
 	}
 
 	@Override
@@ -70,7 +62,8 @@ public class ExprLastGUI extends SimpleExpression<GUI> {
 		if (id != null) {
 			String id = this.id.getSingle(e);
 			if (id != null) {
-				GUI gui = SkriptGUI.getGUIManager().getGUI(id);
+
+				GUI gui = SUPERLIB.getGUIManager().getGUI(id);
 				if (gui != null) {
 					gui.setID(null);
 				}
@@ -84,7 +77,7 @@ public class ExprLastGUI extends SimpleExpression<GUI> {
 	}
 
 	@Override
-	public Class<? extends GUI> getReturnType() {
+	public @NotNull Class<? extends GUI> getReturnType() {
 		return GUI.class;
 	}
 

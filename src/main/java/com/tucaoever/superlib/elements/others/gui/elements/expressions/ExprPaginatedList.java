@@ -24,12 +24,6 @@ import java.util.List;
 @Since("1.1.0")
 public class ExprPaginatedList extends SimpleExpression<Object> {
 
-	static {
-		Skript.registerExpression(ExprPaginatedList.class, Object.class, ExpressionType.SIMPLE,
-				"page[s] %numbers% of %objects% with %number% lines"
-		);
-	}
-
 	@SuppressWarnings("NotNullFieldNotInitialized")
 	private Expression<Number> pages;
 	@Nullable

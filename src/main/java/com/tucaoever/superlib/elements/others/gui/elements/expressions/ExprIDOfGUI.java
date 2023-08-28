@@ -25,10 +25,6 @@ import javax.annotation.Nullable;
 @Since("1.3")
 public class ExprIDOfGUI extends SimplePropertyExpression<GUI, String> {
 
-	static {
-		register(ExprIDOfGUI.class, String.class, "id[entifier]", "guiinventorys");
-	}
-
 	@Override
 	@Nullable
 	public String convert(GUI gui) {

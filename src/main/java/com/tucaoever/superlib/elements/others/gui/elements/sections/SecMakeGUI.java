@@ -16,7 +16,7 @@ import ch.njol.skript.lang.Trigger;
 import ch.njol.skript.lang.TriggerItem;
 import ch.njol.skript.variables.Variables;
 import ch.njol.util.Kleenean;
-import com.tucaoever.superlib.elements.others.gui.SkriptGUI;
+import com.tucaoever.superlib.SUPERLIB;
 import com.tucaoever.superlib.elements.others.gui.gui.GUI;
 import org.bukkit.event.Event;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -36,16 +36,6 @@ import java.util.List;
 })
 @Since("1.0.0, 1.2.0 (making specific slots stealable)")
 public class SecMakeGUI extends EffectSection {
-
-	static {
-		Skript.registerSection(SecMakeGUI.class,
-				"(make|format) [the] next gui [slot] (with|to) [removable:([re]mov[e]able|stealable)] %itemtype%",
-				"(make|format) gui [slot[s]] %strings/numbers% (with|to) [removable:([re]mov[e]able|stealable)] %itemtype%",
-				"(un(make|format)|remove) [the] next gui [slot]",
-				"(un(make|format)|remove) gui [slot[s]] %strings/numbers%",
-				"(un(make|format)|remove) all [[of] the] gui [slots]"
-		);
-	}
 
 	@Nullable
 	private Trigger trigger;
@@ -91,7 +81,7 @@ public class SecMakeGUI extends EffectSection {
 	@Override
 	@Nullable
 	public TriggerItem walk(Event e) {
-		GUI gui = SkriptGUI.getGUIManager().getGUI(e);
+		GUI gui = SUPERLIB.getGUIManager().getGUI(e);
 
 		if (gui == null) { // We aren't going to do anything with this section
 			return walk(e, false);

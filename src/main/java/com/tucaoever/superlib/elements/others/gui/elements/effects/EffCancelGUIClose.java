@@ -11,7 +11,7 @@ import ch.njol.skript.lang.SectionSkriptEvent;
 import ch.njol.skript.lang.SkriptEvent;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
 import ch.njol.util.Kleenean;
-import com.tucaoever.superlib.elements.others.gui.SkriptGUI;
+import com.tucaoever.superlib.SUPERLIB;
 import com.tucaoever.superlib.elements.others.gui.elements.sections.SecGUIOpenClose;
 import com.tucaoever.superlib.elements.others.gui.gui.GUI;
 import org.bukkit.event.Event;
@@ -33,12 +33,6 @@ import javax.annotation.Nullable;
 @Since("1.2.0")
 public class EffCancelGUIClose extends Effect {
 
-	static {
-		Skript.registerEffect(EffCancelGUIClose.class,
-				"(cancel|1¦uncancel) [the] gui clos(e|ing)"
-		);
-	}
-
 	private boolean cancel;
 
 	@Override
@@ -54,7 +48,7 @@ public class EffCancelGUIClose extends Effect {
 
 	@Override
 	protected void execute(Event e) {
-		GUI gui = SkriptGUI.getGUIManager().getGUI(e);
+		GUI gui = SUPERLIB.getGUIManager().getGUI(e);
 		if (gui != null) {
 			gui.setCloseCancelled(cancel);
 		}

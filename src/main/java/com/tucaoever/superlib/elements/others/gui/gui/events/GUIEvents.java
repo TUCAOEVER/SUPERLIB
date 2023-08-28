@@ -1,6 +1,6 @@
 package com.tucaoever.superlib.elements.others.gui.gui.events;
 
-import com.tucaoever.superlib.elements.others.gui.SkriptGUI;
+import com.tucaoever.superlib.SUPERLIB;
 import com.tucaoever.superlib.elements.others.gui.gui.GUI;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -39,7 +39,7 @@ public class GUIEvents implements Listener {
 		}
 
 		// Don't handle this event if there isn't a matching GUI for it
-		GUI gui = SkriptGUI.getGUIManager().getGUI(event.getInventory());
+		GUI gui = SUPERLIB.getGUIManager().getGUI(event.getInventory());
 		if (gui == null) {
 			return;
 		}
@@ -123,7 +123,7 @@ public class GUIEvents implements Listener {
 
 	@EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
 	public void onInventoryDrag(InventoryDragEvent e) {
-		GUI gui = SkriptGUI.getGUIManager().getGUI(e.getInventory());
+		GUI gui = SUPERLIB.getGUIManager().getGUI(e.getInventory());
 		if (gui != null) {
 			// Check if any slots in the actual GUI were changed. We don't care if only the player's inventory was changed.
 			int lastSlotIndex = gui.getInventory().getSize() - 1;
@@ -138,7 +138,7 @@ public class GUIEvents implements Listener {
 
 	@EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
 	public void onInventoryOpen(InventoryOpenEvent e) {
-		GUI gui = SkriptGUI.getGUIManager().getGUI(e.getInventory());
+		GUI gui = SUPERLIB.getGUIManager().getGUI(e.getInventory());
 		if (gui != null) {
 			gui.getEventHandler().onOpen(e);
 		}
@@ -146,7 +146,7 @@ public class GUIEvents implements Listener {
 
 	@EventHandler(priority = EventPriority.LOWEST)
 	public void onInventoryClose(InventoryCloseEvent e) {
-		GUI gui = SkriptGUI.getGUIManager().getGUI(e.getInventory());
+		GUI gui = SUPERLIB.getGUIManager().getGUI(e.getInventory());
 		if (gui != null) {
 			gui.getEventHandler().onClose(e);
 		}

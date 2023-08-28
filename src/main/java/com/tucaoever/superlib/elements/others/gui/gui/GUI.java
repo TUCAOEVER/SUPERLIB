@@ -1,6 +1,6 @@
 package com.tucaoever.superlib.elements.others.gui.gui;
 
-import com.tucaoever.superlib.elements.others.gui.SkriptGUI;
+import com.tucaoever.superlib.SUPERLIB;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
@@ -40,7 +40,7 @@ public class GUI {
 
 				Consumer<InventoryClickEvent> runOnClick = slotData.getRunOnClick();
 				if (runOnClick != null) {
-					SkriptGUI.getGUIManager().setGUI(e, GUI.this);
+					SUPERLIB.getGUIManager().setGUI(e, GUI.this);
 					runOnClick.accept(e);
 				}
 			} else { // If there is no slot data, cancel if this GUI doesn't have stealable items
@@ -70,7 +70,7 @@ public class GUI {
 			}
 
 			if (onOpen != null) {
-				SkriptGUI.getGUIManager().setGUI(e, GUI.this);
+				SUPERLIB.getGUIManager().setGUI(e, GUI.this);
 				onOpen.accept(e);
 			}
 		}
@@ -82,10 +82,10 @@ public class GUI {
 			}
 
 			if (onClose != null) {
-				SkriptGUI.getGUIManager().setGUI(e, GUI.this);
+				SUPERLIB.getGUIManager().setGUI(e, GUI.this);
 				onClose.accept(e);
 				if (closeCancelled) {
-					Bukkit.getScheduler().runTaskLater(SkriptGUI.getInstance(), () -> {
+					Bukkit.getScheduler().runTaskLater(SUPERLIB.getInstance(), () -> {
 						// Reset behavior (it shouldn't persist)
 						setCloseCancelled(false);
 
@@ -99,11 +99,11 @@ public class GUI {
 			}
 
 			if (id == null && inventory.getViewers().size() == 1) { // Only stop tracking if it isn't a global GUI
-				Bukkit.getScheduler().runTaskLater(SkriptGUI.getInstance(), () -> SkriptGUI.getGUIManager().unregister(GUI.this), 1);
+				Bukkit.getScheduler().runTaskLater(SUPERLIB.getInstance(), () -> SUPERLIB.getGUIManager().unregister(GUI.this), 1);
 			}
 
 			// To combat issues like https://github.com/APickledWalrus/skript-gui/issues/60
-			Bukkit.getScheduler().runTaskLater(SkriptGUI.getInstance(), () -> ((Player) e.getPlayer()).updateInventory(), 1);
+			Bukkit.getScheduler().runTaskLater(SUPERLIB.getInstance(), () -> ((Player) e.getPlayer()).updateInventory(), 1);
 		}
 	};
 
@@ -130,7 +130,7 @@ public class GUI {
 		this.inventory = inventory;
 		this.removableItems = stealableItems;
 		this.name = name != null ? name : inventory.getType().getDefaultTitle();
-		SkriptGUI.getGUIManager().register(this);
+		SUPERLIB.getGUIManager().register(this);
 	}
 
 	public Inventory getInventory() {
@@ -200,7 +200,7 @@ public class GUI {
 			viewer.openInventory(newInventory);
 			viewer.setItemOnCursor(cursor);
 		}
-		SkriptGUI.getGUIManager().transferRegistration(this, newInventory);
+		SUPERLIB.getGUIManager().transferRegistration(this, newInventory);
 		inventory = newInventory;
 		this.name = name;
 
@@ -270,7 +270,7 @@ public class GUI {
 	 */
 	public void setItem(Object slot, @Nullable ItemStack item, boolean removable, @Nullable Consumer<InventoryClickEvent> consumer) {
 		if (rawShape == null) {
-			SkriptGUI.getInstance().getLogger().warning("Unable to set the item in a gui named '" + getName() + "' as it has a null shape.");
+			SUPERLIB.warn("Unable to set the item in a gui named '" + getName() + "' as it has a null shape.");
 			return;
 		}
 
@@ -478,7 +478,7 @@ public class GUI {
 	public void setID(@Nullable String id) {
 		this.id = id;
 		if (id == null && inventory.getViewers().size() == 0) {
-			SkriptGUI.getGUIManager().unregister(this);
+			SUPERLIB.getGUIManager().unregister(this);
 			clear();
 		}
 	}

@@ -8,6 +8,11 @@ import com.tucaoever.superlib.addons.skriptyaml.utils.versions.SkriptAdapter;
 import com.tucaoever.superlib.addons.skriptyaml.utils.versions.V2_6;
 import com.tucaoever.superlib.addons.skriptyaml.utils.yaml.SkriptYamlConstructor;
 import com.tucaoever.superlib.addons.skriptyaml.utils.yaml.SkriptYamlRepresenter;
+import com.tucaoever.superlib.elements.others.gui.SkriptClasses;
+import com.tucaoever.superlib.elements.others.gui.SkriptConverters;
+import com.tucaoever.superlib.elements.others.gui.gui.GUIManager;
+import com.tucaoever.superlib.elements.others.gui.gui.events.GUIEvents;
+import com.tucaoever.superlib.elements.others.gui.gui.events.RecipeEvent;
 import com.tucaoever.superlib.elements.others.scoreboard.ScoreBoardManager;
 import com.tucaoever.superlib.register.*;
 import com.tucaoever.superlib.util.NBT.NBTApi;
@@ -32,6 +37,7 @@ public class SUPERLIB extends JavaPlugin {
     private static SUPERLIB instance;
     private static SkriptYamlRepresenter representer;
     private static SkriptYamlConstructor constructor;
+    private static GUIManager manager;
     private static RowSetFactory rowSetFactory;
     private final SkriptAdapter adapter = new V2_6();
 
@@ -68,6 +74,10 @@ public class SUPERLIB extends JavaPlugin {
         return rowSetFactory;
     }
 
+    public static GUIManager getGUIManager() {
+        return manager;
+    }
+
     public void onEnable() {
         saveDefaultConfig();
 
@@ -79,7 +89,17 @@ public class SUPERLIB extends JavaPlugin {
         Events.register();
         Expressions.register();
         Types.register();
+        Sections.register();
         Others.register();
+
+        new SkriptClasses();
+        new SkriptConverters();
+        manager = new GUIManager();
+        getServer().getPluginManager().registerEvents(new GUIEvents(), this);
+        if (Skript.classExists("com.destroystokyo.paper.event.player.PlayerRecipeBookClickEvent")) {
+            // We need to track this event (see https://github.com/APickledWalrus/skript-gui/issues/33)
+            getServer().getPluginManager().registerEvents(new RecipeEvent(), this);
+        }
 
         try {
             rowSetFactory = RowSetProvider.newFactory();

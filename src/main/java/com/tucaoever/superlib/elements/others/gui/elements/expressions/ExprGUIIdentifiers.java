@@ -1,16 +1,14 @@
 package com.tucaoever.superlib.elements.others.gui.elements.expressions;
 
-import ch.njol.skript.Skript;
 import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.doc.Since;
 import ch.njol.skript.lang.Expression;
-import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
-import com.tucaoever.superlib.elements.others.gui.SkriptGUI;
+import com.tucaoever.superlib.SUPERLIB;
 import com.tucaoever.superlib.elements.others.gui.gui.GUI;
 import org.bukkit.event.Event;
 
@@ -29,12 +27,6 @@ import java.util.List;
 @Since("1.2.1")
 public class ExprGUIIdentifiers extends SimpleExpression<String> {
 
-	static {
-		Skript.registerExpression(ExprGUIIdentifiers.class, String.class, ExpressionType.SIMPLE,
-				"[(all [[of] the]|the)] (global|registered) gui id(s|entifiers)"
-		);
-	}
-
 	@Override
 	public boolean init(Expression<?>[] exprs, int matchedPattern, Kleenean isDelayed, ParseResult parseResult) {
 		return true;
@@ -43,7 +35,7 @@ public class ExprGUIIdentifiers extends SimpleExpression<String> {
 	@Override
 	protected String[] get(Event e) {
 		List<String> identifiers = new ArrayList<>();
-		for (GUI gui : SkriptGUI.getGUIManager().getTrackedGUIs()) {
+		for (GUI gui : SUPERLIB.getGUIManager().getTrackedGUIs()) {
 			if (gui.getID() != null) {
 				identifiers.add(gui.getID());
 			}

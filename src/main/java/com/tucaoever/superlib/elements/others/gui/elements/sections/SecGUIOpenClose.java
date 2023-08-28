@@ -13,7 +13,7 @@ import ch.njol.skript.lang.Trigger;
 import ch.njol.skript.lang.TriggerItem;
 import ch.njol.skript.variables.Variables;
 import ch.njol.util.Kleenean;
-import com.tucaoever.superlib.elements.others.gui.SkriptGUI;
+import com.tucaoever.superlib.SUPERLIB;
 import com.tucaoever.superlib.elements.others.gui.gui.GUI;
 import org.bukkit.event.Event;
 import org.bukkit.event.inventory.InventoryCloseEvent;
@@ -33,14 +33,6 @@ import java.util.List;
 })
 @Since("1.0.0, 1.3 (open section)")
 public class SecGUIOpenClose extends Section {
-
-	static {
-		Skript.registerSection(SecGUIOpenClose.class,
-				"run (when|while) (open[ing]|1¦clos(e|ing)) [[the] gui]",
-				"run (when|while) [the] gui (opens|1¦closes)",
-				"run on gui (open[ing]|1¦clos(e|ing))"
-		);
-	}
 
 	@SuppressWarnings("NotNullFieldNotInitialized")
 	private Trigger trigger;
@@ -68,7 +60,7 @@ public class SecGUIOpenClose extends Section {
 	@Override
 	@Nullable
 	public TriggerItem walk(Event e) {
-		GUI gui = SkriptGUI.getGUIManager().getGUI(e);
+		GUI gui = SUPERLIB.getGUIManager().getGUI(e);
 		if (gui != null) {
 			Object variables = Variables.copyLocalVariables(e);
 			if (close) {
