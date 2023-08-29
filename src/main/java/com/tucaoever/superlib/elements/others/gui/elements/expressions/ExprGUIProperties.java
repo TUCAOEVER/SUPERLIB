@@ -75,7 +75,7 @@ public class ExprGUIProperties extends SimplePropertyExpression<GUI, Object> {
 	}
 
 	@Override
-	public void change(Event e, Object @Nullable [] delta, ChangeMode mode) {
+	public void change(Event e, Object [] delta, ChangeMode mode) {
 		if (delta == null || (mode != ChangeMode.SET && mode != ChangeMode.RESET)) {
 			return;
 		}

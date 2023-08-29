@@ -22,6 +22,7 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.io.StreamCorruptedException;
+import java.util.Map;
 
 import static com.tucaoever.superlib.elements.others.nbt.types.SkriptTypes.NBT_COMPOUND_CHANGER;
 
@@ -29,12 +30,15 @@ public class Types {
     public static void register() {
         if (Classes.getExactClassInfo(ClickEvent.Action.class) == null) {
             Classes.registerClass(new ClassInfo<>(ClickEvent.Action.class, "clickeventaction")
-                    .user("clickeventaction?s")
-                    .serializer(new EnumSerializer<>(ClickEvent.Action.class))
+                    .user("clickeventactions?")
                     .parser(new Parser<>() {
                         @Override
                         public ClickEvent.Action parse(@NotNull String s, @NotNull ParseContext parseContext) {
-                            return ClickEvent.Action.valueOf(ClickEvent.Action.class, s.replace(" ", "_").toUpperCase().trim());
+                            try {
+                                return ClickEvent.Action.valueOf(ClickEvent.Action.class, s.replace(" ", "_").toUpperCase().trim());
+                            } catch (IllegalArgumentException e) {
+                                return null;
+                            }
                         }
 
                         @Override
@@ -46,17 +50,21 @@ public class Types {
                         public @NotNull String toVariableNameString(ClickEvent.Action e) {
                             return "clickeventaction:" + e.toString();
                         }
-                    }));
+                    })
+                    .serializer(new EnumSerializer<>(ClickEvent.Action.class)));
         }
 
         if (Classes.getExactClassInfo(HoverEvent.Action.class) == null) {
             Classes.registerClass(new ClassInfo<>(HoverEvent.Action.class, "hovereventaction")
-                    .user("hovereventaction?s")
-                    .serializer(new EnumSerializer<>(HoverEvent.Action.class))
+                    .user("hovereventactions?")
                     .parser(new Parser<>() {
                         @Override
                         public HoverEvent.Action parse(@NotNull String s, @NotNull ParseContext parseContext) {
-                            return HoverEvent.Action.valueOf(HoverEvent.Action.class, s.replace(" ", "_").toUpperCase().trim());
+                            try {
+                                return HoverEvent.Action.valueOf(HoverEvent.Action.class, s.replace(" ", "_").toUpperCase().trim());
+                            } catch (IllegalArgumentException e) {
+                                return null;
+                            }
                         }
 
                         @Override
@@ -68,7 +76,8 @@ public class Types {
                         public @NotNull String toVariableNameString(HoverEvent.Action e) {
                             return "hovereventaction:" + e.toString();
                         }
-                    }));
+                    })
+                    .serializer(new EnumSerializer<>(HoverEvent.Action.class)));
         }
 
 
@@ -131,8 +140,8 @@ public class Types {
                 .description("Represents the NBT compound of an entity/block/item.")
                 .usage("{id:\"minecraft:netherite_axe\",tag:{Damage:0,Enchantments:[{id:\"minecraft:unbreaking\",lvl:2s}]},Count:1b}")
                 .examples("set {_a} to nbt compound of player")
-                .since("1.6.0").
-                parser(new Parser<>() {
+                .since("1.6.0")
+                .parser(new Parser<>() {
 
                     @Override
                     public boolean canParse(@NotNull ParseContext context) {

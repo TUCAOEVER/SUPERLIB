@@ -1,5 +1,6 @@
 package com.tucaoever.superlib.elements.others.hook.mmoitems.expressions;
 
+import ch.njol.skript.aliases.ItemType;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
 import ch.njol.skript.lang.util.SimpleExpression;
@@ -7,7 +8,6 @@ import ch.njol.util.Kleenean;
 import com.tucaoever.superlib.api.Description;
 import com.tucaoever.superlib.api.Examples;
 import net.Indyuce.mmoitems.MMOItems;
-import net.Indyuce.mmoitems.api.Type;
 import org.bukkit.event.Event;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
@@ -16,14 +16,14 @@ import javax.annotation.Nullable;
 
 @Examples("mmoitem type \"SWORD\" id \"0010\"")
 @Description("get mmoitem with specific type and id")
-public class ExprItem extends SimpleExpression<ItemStack> {
+public class ExprItem extends SimpleExpression<ItemType> {
 
     private Expression<String> type;
     private Expression<String> id;
 
     @Override
-    public @NotNull Class<? extends ItemStack> getReturnType() {
-        return ItemStack.class;
+    public @NotNull Class<? extends ItemType> getReturnType() {
+        return ItemType.class;
     }
 
     @Override
@@ -45,15 +45,14 @@ public class ExprItem extends SimpleExpression<ItemStack> {
     }
 
     @Override
-    protected ItemStack @NotNull [] get(@NotNull Event event) {
+    protected ItemType @NotNull [] get(@NotNull Event event) {
         String type = this.type.getSingle(event);
         String id = this.id.getSingle(event);
         if (type != null && id != null) {
             ItemStack itemStack = MMOItems.plugin.getItem(type, id);
-            if (itemStack == null) return new ItemStack[0];
-            return new ItemStack[]{itemStack};
-        } else {
-            return new ItemStack[0];
+            if (itemStack == null) return new ItemType[]{};
+            else return new ItemType[]{new ItemType(itemStack)};
         }
+        return new ItemType[]{};
     }
 }

@@ -143,7 +143,7 @@ public class ExprGUIValues extends SimpleExpression<Object> {
 	}
 
 	@Override
-	public void change(Event event, Object @Nullable [] delta, ChangeMode mode) {
+	public void change(Event event, Object [] delta, ChangeMode mode) {
 		if (delta == null || !(event instanceof InventoryClickEvent)) {
 			return;
 		}

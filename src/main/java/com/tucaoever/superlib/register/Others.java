@@ -1,6 +1,7 @@
 package com.tucaoever.superlib.register;
 
 import ch.njol.skript.Skript;
+import ch.njol.skript.aliases.ItemType;
 import ch.njol.skript.classes.ClassInfo;
 import ch.njol.skript.classes.Parser;
 import ch.njol.skript.conditions.base.PropertyCondition;
@@ -112,7 +113,7 @@ public class Others {
         }
         if (Bukkit.getPluginManager().isPluginEnabled("MMOItems")) {
             SUPERLIB.log("Enabled Support For MMOItems");
-            Skript.registerExpression(ExprItem.class, ItemStack.class, ExpressionType.COMBINED,
+            Skript.registerExpression(ExprItem.class, ItemType.class, ExpressionType.COMBINED,
                     "[the] mmoitem[s] [with] type %string% [([and ]with)] id %string%");
             Skript.registerExpression(ExprId.class, String.class, ExpressionType.PROPERTY,
                     "[the] mmoitem[s] id of %itemstack%");
@@ -124,9 +125,9 @@ public class Others {
         if (Bukkit.getPluginManager().isPluginEnabled("MythicMobs")) {
             SUPERLIB.log("Enabled Support For MythicMobs");
             Skript.registerExpression(ExprMobType.class, String.class, ExpressionType.PROPERTY,
-                    "mob[-]type of %activemob%");
+                    "mob[-| ]type of %activemob/entity%");
             Skript.registerExpression(ExprActiveMob.class, ActiveMob.class, ExpressionType.PROPERTY,
-                    "active[-]mob (of|from) %entity%");
+                    "active[-| ]mob (of|from) %entity%");
             Skript.registerExpression(ExprEntity.class, Entity.class, ExpressionType.PROPERTY,
                     "entity (of|from) activemob %activemob%");
             Skript.registerEffect(EffSpawnMythicMob.class,

@@ -58,7 +58,7 @@ public class ExprLastGUI extends SimpleExpression<GUI> {
 	}
 
 	@Override
-	public void change(Event e, Object @Nullable [] delta, ChangeMode mode) {
+	public void change(Event e, Object [] delta, ChangeMode mode) {
 		if (id != null) {
 			String id = this.id.getSingle(e);
 			if (id != null) {

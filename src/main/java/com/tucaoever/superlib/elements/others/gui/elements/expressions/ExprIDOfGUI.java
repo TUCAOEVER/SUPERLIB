@@ -38,7 +38,7 @@ public class ExprIDOfGUI extends SimplePropertyExpression<GUI, String> {
 	}
 
 	@Override
-	public void change(Event e, Object @Nullable [] delta, ChangeMode mode) {
+	public void change(Event e, Object [] delta, ChangeMode mode) {
 		if (delta == null || delta[0] == null) {
 			return;
 		}
