@@ -1,5 +1,6 @@
 package com.tucaoever.superlib.elements.others.hook.mythicmobs.conditions;
 
+import ch.njol.skript.conditions.base.PropertyCondition;
 import ch.njol.skript.lang.Condition;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
@@ -8,25 +9,18 @@ import com.tucaoever.superlib.api.Examples;
 import io.lumine.mythic.bukkit.MythicBukkit;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.Event;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 @Examples("target entity is activemob")
-public class CondIsActiveMob extends Condition {
-
-    private Expression<Entity> entity;
+public class CondIsActiveMob extends PropertyCondition<Entity> {
 
     @Override
-    public boolean check(Event event) {
-        return MythicBukkit.inst().getMobManager().isActiveMob(entity.getSingle(event).getUniqueId());
+    public boolean check(Entity entity) {
+        return MythicBukkit.inst().getMobManager().isActiveMob(entity.getUniqueId());
     }
 
     @Override
-    public String toString(@Nullable Event e, boolean debug) {
-        return null;
-    }
-
-    @Override
-    public boolean init(Expression<?>[] exprs, int matchedPattern, Kleenean isDelayed, SkriptParser.ParseResult parseResult) {
-        this.entity = (Expression<Entity>) exprs[0];
-        return entity != null;
+    protected @NotNull String getPropertyName() {
+        return "active mob";
     }
 }

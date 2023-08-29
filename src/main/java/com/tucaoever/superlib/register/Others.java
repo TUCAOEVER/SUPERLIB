@@ -6,6 +6,7 @@ import ch.njol.skript.classes.ClassInfo;
 import ch.njol.skript.classes.Parser;
 import ch.njol.skript.conditions.base.PropertyCondition;
 import ch.njol.skript.expressions.base.EventValueExpression;
+import ch.njol.skript.lang.Condition;
 import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.ParseContext;
 import ch.njol.skript.lang.util.SimpleEvent;
@@ -21,6 +22,7 @@ import com.tucaoever.superlib.elements.others.hook.mmoitems.conditions.CondIsIte
 import com.tucaoever.superlib.elements.others.hook.mmoitems.expressions.ExprId;
 import com.tucaoever.superlib.elements.others.hook.mmoitems.expressions.ExprItem;
 import com.tucaoever.superlib.elements.others.hook.mmoitems.expressions.ExprType;
+import com.tucaoever.superlib.elements.others.hook.mythicmobs.conditions.CondHasActiveMob;
 import com.tucaoever.superlib.elements.others.hook.mythicmobs.conditions.CondIsActiveMob;
 import com.tucaoever.superlib.elements.others.hook.mythicmobs.effects.EffSpawnMythicMob;
 import com.tucaoever.superlib.elements.others.hook.mythicmobs.expressions.ExprActiveMob;
@@ -124,6 +126,11 @@ public class Others {
         }
         if (Bukkit.getPluginManager().isPluginEnabled("MythicMobs")) {
             SUPERLIB.log("Enabled Support For MythicMobs");
+
+            Skript.registerCondition(CondHasActiveMob.class,
+                    "%world% (has|have) active[-| ]mob[s] %activemob/string%",
+                    "%world% (doesn't|does not|do not|don't) have active[-| ]mob[s] %activemob/string%");
+
             Skript.registerExpression(ExprMobType.class, String.class, ExpressionType.PROPERTY,
                     "mob[-| ]type of %activemob/entity%");
             Skript.registerExpression(ExprActiveMob.class, ActiveMob.class, ExpressionType.PROPERTY,
