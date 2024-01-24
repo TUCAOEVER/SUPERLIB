@@ -17,11 +17,12 @@ import org.bukkit.entity.Player;
 
 public class Effects {
     public static void register() {
+        Skript.registerEffect(EffFishHookPullIn.class,
+                "pull in hooked entit(y|ies) of %entities%");
+
         PropertyExpression.register(ExprJSONToString.class, String.class,
                 "[serialized] json (form|representation)",
                 "objects");
-        Skript.registerEffect(EffSendActionBar.class,
-                "send [the] action bar [with text] %string% to %players%");
         Skript.registerEffect(EffCreateFile.class,
                 "create file %string%",
                 "create folder %string%");

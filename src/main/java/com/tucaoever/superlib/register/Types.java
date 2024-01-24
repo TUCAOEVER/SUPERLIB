@@ -9,6 +9,7 @@ import ch.njol.skript.lang.Condition;
 import ch.njol.skript.lang.ParseContext;
 import ch.njol.skript.log.ErrorQuality;
 import ch.njol.skript.registrations.Classes;
+import ch.njol.skript.util.EnumUtils;
 import ch.njol.yggdrasil.Fields;
 import com.tucaoever.superlib.util.LambdaCondition;
 import com.tucaoever.superlib.util.NBT.NBTCustomType;
@@ -18,6 +19,8 @@ import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
+import org.bukkit.entity.FishHook;
+import org.bukkit.event.player.PlayerFishEvent;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
@@ -80,7 +83,6 @@ public class Types {
                     .serializer(new EnumSerializer<>(HoverEvent.Action.class)));
         }
 
-
         Classes.registerClass(new ClassInfo<>(LambdaCondition.class, "predicate")
                 .parser(new Parser<>() {
                     @Override
@@ -115,7 +117,6 @@ public class Types {
                 .user("nbt ?types?").name("NBT - Tag Type")
                 .description("Represents a type of NBT tag.").usage(NBTCustomType.getNames())
                 .examples("set byte tag \"points\" of {_nbt} to 1", "set compound tag \"tool\" of {_nbt} to nbt compound of player's tool")
-                .since("1.10.0")
                 .parser(new Parser<>() {
 
                     @Nullable
@@ -140,7 +141,6 @@ public class Types {
                 .description("Represents the NBT compound of an entity/block/item.")
                 .usage("{id:\"minecraft:netherite_axe\",tag:{Damage:0,Enchantments:[{id:\"minecraft:unbreaking\",lvl:2s}]},Count:1b}")
                 .examples("set {_a} to nbt compound of player")
-                .since("1.6.0")
                 .parser(new Parser<>() {
 
                     @Override
@@ -223,7 +223,6 @@ public class Types {
                         "set hover event of {_t} to a new hover event showing \"Clicky Clicky!\"",
                         "set click event of {_t} to a new click event to open url \"https://OurDiscord.com\"",
                         "send component {_t} to player")
-                .since("1.5.0")
                 .parser(new Parser<>() {
                     @Override
                     public @NotNull String toString(@NotNull BaseComponent o, int flags) {
@@ -240,6 +239,37 @@ public class Types {
                         return o.toLegacyText();
                     }
                 }));
-    }
 
+        if (Classes.getExactClassInfo(PlayerFishEvent.State.class) == null) {
+            EnumUtils<PlayerFishEvent.State> FISH_STATE_ENUM = new EnumUtils<>(PlayerFishEvent.State.class, "fishingstate");
+            Classes.registerClass(new ClassInfo<>(PlayerFishEvent.State.class, "fishingstate")
+                    .user("fish(ing)? ?states?")
+                    .name("Fish Event State")
+                    .usage(FISH_STATE_ENUM.getAllNames())
+
+                    .parser(new Parser<>() {
+                        @Override
+                        public PlayerFishEvent.State parse(String s, ParseContext context) {
+                            return FISH_STATE_ENUM.parse(s);
+                        }
+
+                        @Override
+                        public @NotNull String toString(PlayerFishEvent.State o, int flags) {
+                            return FISH_STATE_ENUM.toString(o, flags);
+                        }
+
+                        @Override
+                        public @NotNull String toVariableNameString(PlayerFishEvent.State o) {
+                            return o.name();
+                        }
+                    })
+                    .serializer(new EnumSerializer<>(PlayerFishEvent.State.class))
+            );
+        }
+        if (Classes.getExactClassInfo(FishHook.class) == null) {
+            Classes.registerClass(new ClassInfo<>(FishHook.HookState.class, "fishhookstate")
+                    .user("fish ?hook ?states?")
+                    .name("Fish Hook State"));
+        }
+    }
 }

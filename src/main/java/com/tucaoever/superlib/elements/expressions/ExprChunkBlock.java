@@ -15,10 +15,6 @@ public class ExprChunkBlock extends SimpleExpression<Block>
     private Expression<Number> yExpr;
     private Expression<Number> zExpr;
     private int level;
-    public static final int LAYER = 0;
-    public static final int TOP = 1;
-    public static final int BOTTOM = 2;
-    public static final int SEA_LEVEL = 3;
     private boolean south;
     private boolean east;
     private boolean center;
@@ -81,9 +77,9 @@ public class ExprChunkBlock extends SimpleExpression<Block>
         int y;
         int z;
         if (this.xExpr != null) {
-            x = ((Number)this.xExpr.getSingle(event)).intValue();
-            y = ((Number)this.yExpr.getSingle(event)).intValue();
-            z = ((Number)this.zExpr.getSingle(event)).intValue();
+            x = this.xExpr.getSingle(event).intValue();
+            y = this.yExpr.getSingle(event).intValue();
+            z = this.zExpr.getSingle(event).intValue();
         }
         else {
             y = getLevel(this.level, this.yExpr, event);
@@ -96,7 +92,7 @@ public class ExprChunkBlock extends SimpleExpression<Block>
                 z = (this.south ? 15 : 0);
             }
         }
-        return new Block[] { ((Chunk)this.chunkExpression.getSingle(event)).getBlock(x, y, z) };
+        return new Block[] { this.chunkExpression.getSingle(event).getBlock(x, y, z) };
     }
     
     public boolean isSingle() {

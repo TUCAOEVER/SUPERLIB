@@ -138,8 +138,8 @@ public class Others {
             Skript.registerExpression(ExprEntity.class, Entity.class, ExpressionType.PROPERTY,
                     "entity (of|from) activemob %activemob%");
             Skript.registerEffect(EffSpawnMythicMob.class,
-                    "(spawn|summon) (mythicmob[s]|activemob[s]) %string% [at] %location%",
-                    "(spawn|summon) %number% of (mythicmob[s]|activemob[s]) %string% [at] %location%");
+                    "(spawn|summon) (mythicmob[s]|activemob[s]) %string% %location%",
+                    "(spawn|summon) %number% of (mythicmob[s]|activemob[s]) %string% %location%");
             PropertyCondition.register(CondIsActiveMob.class,
                     "activemob", "entity");
 

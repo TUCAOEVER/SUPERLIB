@@ -6,7 +6,7 @@ import ch.njol.skript.registrations.EventValues;
 import ch.njol.skript.util.Getter;
 import com.tucaoever.superlib.SUPERLIB;
 import com.tucaoever.superlib.elements.events.EvtChunkChange;
-import com.tucaoever.superlib.elements.events.ChunkChangeListener;
+import com.tucaoever.superlib.elements.listeners.ChunkChangeListener;
 import com.tucaoever.superlib.elements.events.EvtTabComplete;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;

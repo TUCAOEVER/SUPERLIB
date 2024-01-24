@@ -11,9 +11,6 @@ import org.bukkit.event.Event;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-/**
- * Created by Tlatoani on 2/25/17.
- */
 public class ExprChunkBlocks extends SimpleExpression<Block> {
     private Expression<Number> x1Expression = null;
     private Expression<Number> y1Expression = null;

@@ -1,6 +1,8 @@
 package com.tucaoever.superlib.register;
 
 import ch.njol.skript.Skript;
+import ch.njol.skript.conditions.base.PropertyCondition;
+import com.tucaoever.superlib.elements.conditions.CondFishHookInOpenWater;
 import com.tucaoever.superlib.elements.conditions.CondOperations;
 import com.tucaoever.superlib.elements.others.file.conditions.CondFileExists;
 import com.tucaoever.superlib.elements.others.gui.elements.conditions.CondHasGUI;
@@ -18,8 +20,10 @@ public class Conditions {
                 "<.+> \\|\\| <.+>");
         Skript.registerCondition(CondHasGUI.class,
                 "%players% (has|have) a gui [open]",
-                "%players% (doesn't|does not|do not|don't) have a gui [open]"
-        );
+                "%players% (doesn't|does not|do not|don't) have a gui [open]");
+        PropertyCondition.register(CondFishHookInOpenWater.class,
+                "in open water", "entities");
+
     }
 }
 

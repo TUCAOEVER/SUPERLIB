@@ -4,6 +4,8 @@ import ch.njol.skript.Skript;
 import ch.njol.skript.aliases.ItemType;
 import ch.njol.skript.expressions.base.PropertyExpression;
 import ch.njol.skript.lang.ExpressionType;
+import ch.njol.skript.util.Experience;
+import ch.njol.skript.util.Timespan;
 import com.tucaoever.superlib.elements.expressions.*;
 import com.tucaoever.superlib.elements.others.file.expressions.ExprContent;
 import com.tucaoever.superlib.elements.others.file.expressions.ExprFileName;
@@ -22,12 +24,31 @@ import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Chunk;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.FishHook;
+import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 public class Expressions {
 
     public static void register() {
+        Skript.registerExpression(ExprFishEventState.class, PlayerFishEvent.State.class, ExpressionType.SIMPLE,
+                "fish[ing] [event] state");
+        Skript.registerExpression(ExprFishEventEntity.class, Entity.class, ExpressionType.SIMPLE,
+                "fish[ing] [event] caught entity",
+                "fish[ing] [event] hook");
+        Skript.registerExpression(ExprFishingExperience.class, Experience.class, ExpressionType.SIMPLE,
+                "fish[ing] [event] experience");
+
+        PropertyExpression.register(ExprFishHookHookedEntity.class, Entity.class,
+                "hooked entity", "entities");
+        PropertyExpression.register(ExprFishHookState.class, FishHook.HookState.class,
+                "[fish] hook[ed] state", "entities");
+        PropertyExpression.register(ExprFishHookWaitTime.class, Timespan.class,
+                "(min|:max) wait time", "entities");
+        PropertyExpression.register(ExprPufferFishState.class, Integer.class,
+                "puff state", "entities");
+
         Skript.registerExpression(ExprItemWithLegacyLore.class, ItemType.class, ExpressionType.PROPERTY,
                 "%itemtypes% with legacy lore %string%");
         Skript.registerExpression(ExprSubList.class, Object.class, ExpressionType.COMBINED,

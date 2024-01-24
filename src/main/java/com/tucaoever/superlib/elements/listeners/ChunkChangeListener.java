@@ -1,5 +1,6 @@
-package com.tucaoever.superlib.elements.events;
+package com.tucaoever.superlib.elements.listeners;
 
+import com.tucaoever.superlib.elements.events.EvtChunkChange;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.event.EventHandler;
