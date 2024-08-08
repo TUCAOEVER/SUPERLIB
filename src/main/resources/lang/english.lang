@@ -5,3 +5,15 @@ types:
   null: null¦s @a
   javaobject: java object¦s @a
   section: section¦s @a
+  fishingstate: fishing state¦s
+  fishinghook: fishing hook¦s
+
+fishingstate:
+  bite: BITE
+  caught_fish: CAUGHT_FISH
+  caught_entity: CAUGHT_ENTITY
+  failed_attempt: FAILED_ATTEMPT
+  in_ground: IN_GROUND
+  reel_in: REEL_IN
+  fishing: FISHING
+

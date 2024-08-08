@@ -63,9 +63,11 @@ public class Expressions {
                 "%chunks%'[s] entities");
         Skript.registerExpression(ExprBlockCube.class, Block.class, ExpressionType.PROPERTY,
                 "blocks within %location% (to|and) %location%");
-        Skript.registerExpression(ExprChunkCoordiante.class, Number.class, ExpressionType.PROPERTY,
+        Skript.registerExpression(ExprChunkCoordinate.class, Number.class, ExpressionType.PROPERTY,
                 "chunk( |-)(0¦x|1¦z)[( |-)coord] of %chunk%",
                 "%chunk%'s chunk( |-)(0¦x|1¦z)[( |-)coord]");
+        Skript.registerExpression(ExprChunkAtCoordinate.class, Chunk.class, ExpressionType.PROPERTY,
+                "chunk at [coord[inate]s] %number%,[ ]%number% [(in|of) %world%]");
         Skript.registerExpression(ExprChunk.class, Chunk.class, ExpressionType.COMBINED,
                 "chunk %number%, %number% [in %world%]",
                 "chunks [from] %number%, %number% to %number%, %number% [in %world%]",

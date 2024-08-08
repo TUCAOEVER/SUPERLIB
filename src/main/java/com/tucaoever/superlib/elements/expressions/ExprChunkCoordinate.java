@@ -7,13 +7,13 @@ import org.bukkit.Chunk;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.util.SimpleExpression;
 
-public class ExprChunkCoordiante extends SimpleExpression<Number>
+public class ExprChunkCoordinate extends SimpleExpression<Number>
 {
     private Expression<Chunk> chunkExpression;
     private boolean x;
     
     protected Number[] get(final Event event) {
-        final Chunk chunk = (Chunk)this.chunkExpression.getSingle(event);
+        final Chunk chunk = this.chunkExpression.getSingle(event);
         return new Number[] { this.x ? chunk.getX() : chunk.getZ() };
     }
     
