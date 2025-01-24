@@ -174,11 +174,7 @@ public class EffExecuteStatement extends Effect {
             if (o instanceof String) {
                 sb.append(o);
             } else {
-                Expression<?> expr;
-                if (o instanceof Expression)
-                    expr = (Expression<?>) o;
-                else
-                    expr = SkriptUtil.getExpressionFromInfo(o);
+                Expression<?> expr = (Expression<?>) o;
 
                 String before = getString(objects, i - 1);
                 String after = getString(objects, i + 1);
