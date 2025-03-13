@@ -14,7 +14,7 @@ public class Types {
     static {
         Classes.registerClass(new ClassInfo<>(HikariDataSource.class, "datasource")
                 .user("datasources?")
-                .parser(new Parser<HikariDataSource>() {
+                .parser(new Parser<>() {
                     @Override
                     public HikariDataSource parse(String s, ParseContext context) {
                         return null;
@@ -31,7 +31,7 @@ public class Types {
                     }
 
                 })
-                .serializer(new Serializer<HikariDataSource>() {
+                .serializer(new Serializer<>() {
                     @Override
                     public Fields serialize(HikariDataSource o) {
                         Fields fields = new Fields();

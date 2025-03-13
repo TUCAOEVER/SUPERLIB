@@ -27,7 +27,7 @@ public class ExprChunkAtCoordinate extends SimpleExpression<Chunk> {
 
     @SuppressWarnings("NullableProblems")
     @Override
-    protected Chunk @Nullable [] get(Event event) {
+    protected Chunk [] get(Event event) {
         World world = this.world.getSingle(event);
         Number chunkXNum = this.chunkX.getSingle(event);
         Number chunkZNum = this.chunkZ.getSingle(event);
